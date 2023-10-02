@@ -103,8 +103,9 @@
       <li>about</li>
     </ul>
   </div>
-  <div class="headline">
+ <div class="headline" id="playAudioButton">
     <h1>Toneklang</h1>
+    <button id="playAudioBtn" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;"></button>
   </div>
       <div class="paint">
       <canvas id="myCanvas" width="2500px" height="2500px">
@@ -175,5 +176,32 @@
         </script>
       </canvas>
    </div> 
+
+<audio id="backgroundAudio" loop>
+<source src="file:///Users/sorennielsen/Playground/JavaScript/Toneklang/assets/wasGood.mp3" type="audio/mpeg">
+ Your browser does not support the audio element.
+</audio>
+
+<script>
+  // Get the audio element
+  const audio = document.getElementById('backgroundAudio');
+
+  // Get the headline div as the play button
+  const playButton = document.getElementById('playAudioButton');
+
+
+  // Set the desired volume (between 0 and 1)
+  audio.volume = 0.7; // Adjust the value as needed
+
+  // Add a click event listener to the play button (headline)
+  playButton.addEventListener('click', function () {
+    if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+  });
+</script>
+    
 </body>
 </html>
