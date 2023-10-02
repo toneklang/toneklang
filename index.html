@@ -39,7 +39,9 @@
         li {
           background-color: transparent;
           margin-bottom: -2.5vw;
-         
+        }
+        li :hover{
+          color:#07F27B;
         }
         a {
           font-size: 8vw;
@@ -51,7 +53,7 @@
       </style>
       <style>
         .topBar{
-          position:fixed;
+          position:relative;
           margin: 0;
           width: 100%;
           height: 2%;
@@ -72,9 +74,11 @@
           color: white;
           letter-spacing:-3vw; 
           background-color: transparent;
+          position: absolute;
         }
-        .headline h1:hover{
-            color: #07F27B; 
+        .headline h1:hover {
+          color: #07F27B;
+          cursor:pointer; 
         }
         .paint{
           display:flex;
@@ -91,7 +95,7 @@
         canvas {
           max-width: none;
           max-height: none;
-          overflow: visible;
+          overflow: hidden;      
         }
         
     
@@ -100,90 +104,91 @@
 <body>
   <div class="topBar">
     <ul>
-      <li><a href="https://toneklang.com">home</a></li>
+      <li><a href=home.html>Home</a></li>
       <li><a href="https://soundcloud.com/toneklang" target="_blank">music</a></li>
       <li><a href="https://google.com" target="_blank">visual</a></li>
       <li>about</li>
     </ul>
   </div>
- <div class="headline" id="playAudioButton">
+  <div class="headline" id="playAudioButton">
     <h1>Toneklang</h1>
-    <button id="playAudioBtn" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;"></button>
+    <button id="playAudioBtn" style="relative: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;"></button>
   </div>
-      <div class="paint">
-      <canvas id="myCanvas" width="2500px" height="2500px">
-        <script>
-          const canvas = document.getElementById("myCanvas");
-          const context = canvas.getContext("2d");
 
-                
-    
-          const centerX = canvas.width / 2;
-          const centerY = canvas.height / 2;
-          const rectCount = 640;
-          //const radius = 200 * Math.random();
-          const angleIncrement = (2 * Math.PI) / rectCount;
+  <div class="paint">
+    <canvas id="myCanvas" width="2500px" height="2500px">
+      <script>
+        const canvas = document.getElementById("myCanvas");
+        const context = canvas.getContext("2d");
 
-          // Control frame rate by specifying a target frame rate (e.g., 60 frames per second).
-          const targetFrameRate = 6;
-          const frameInterval = 1000 / targetFrameRate;
+              
+  
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const rectCount = 640;
+        //const radius = 200 * Math.random();
+        const angleIncrement = (2 * Math.PI) / rectCount;
 
-          let lastFrameTime = 0;
+        // Control frame rate by specifying a target frame rate (e.g., 60 frames per second).
+        const targetFrameRate = 6;
+        const frameInterval = 1000 / targetFrameRate;
 
-          function drawMe(timestamp){
-            const elapsedTime = timestamp - lastFrameTime; 
+        let lastFrameTime = 0;
 
-            if (elapsedTime >= frameInterval) {  
+        function drawMe(timestamp){
+          const elapsedTime = timestamp - lastFrameTime; 
 
-              context.clearRect(0, 0, canvas.width, canvas.height);  
+          if (elapsedTime >= frameInterval) {  
 
-              const radius = (50 * (2 ^ Math.random() * 30)) + 2;
+            context.clearRect(0, 0, canvas.width, canvas.height);  
 
-              for (let i = 0; i < rectCount; i++) {
-                const angle = i * angleIncrement;
-    
-                const rectX = centerX + radius * Math.cos(angle);
-                const rectY = centerY + radius * Math.sin(angle);
-    
-                const dx = rectX - centerX;
-                const dy = rectY - centerY;
-                const rotationAngle = Math.atan2(dy, dx)
-    
-                const rCol = 30 + (Math.random() * i * 2);
-                const gCol = 120 + i * 10;
-                const bCol = 10 + (Math.random() * i * 4);
-                const rectWidth = 0.5 * (Math.random() * 4);
-                const rectHeight = 640 * (Math.random() * 2);
-                const rectColor = "rgb(" + rCol + "," + gCol + "," + bCol + ")";
-                //const rectColor = "magenta"; 
-        
-                context.save();
-                context.translate(rectX, rectY);
-                context.rotate(rotationAngle);
-                context.fillStyle = rectColor;
-                context.fillRect(-rectWidth / 2, -rectHeight / 2, rectWidth, rectHeight);
-                context.restore();
-              }
+            const radius = (50 * (2 ^ Math.random() * 30)) + 2;
 
-              // Update the last frame time.
-              lastFrameTime = timestamp;
-
+            for (let i = 0; i < rectCount; i++) {
+              const angle = i * angleIncrement;
+  
+              const rectX = centerX + radius * Math.cos(angle);
+              const rectY = centerY + radius * Math.sin(angle);
+  
+              const dx = rectX - centerX;
+              const dy = rectY - centerY;
+              const rotationAngle = Math.atan2(dy, dx)
+  
+              const rCol = 30 + (Math.random() * i * 2);
+              const gCol = 120 + i * 10;
+              const bCol = 10 + (Math.random() * i * 4);
+              const rectWidth = 0.5 * (Math.random() * 4);
+              const rectHeight = 640 * (Math.random() * 2);
+              const rectColor = "rgb(" + rCol + "," + gCol + "," + bCol + ")";
+              //const rectColor = "magenta"; 
+      
+              context.save();
+              context.translate(rectX, rectY);
+              context.rotate(rotationAngle);
+              context.fillStyle = rectColor;
+              context.fillRect(-rectWidth / 2, -rectHeight / 2, rectWidth, rectHeight);
+              context.restore();
             }
 
-            requestAnimationFrame(drawMe);
+            // Update the last frame time.
+            lastFrameTime = timestamp;
 
           }
 
-          drawMe();
+          requestAnimationFrame(drawMe);
 
-        </script>
-      </canvas>
-   </div> 
+        }
 
-<audio id="backgroundAudio" loop>
-<source src="/assets/wasGood.mp3" type="audio/mpeg">
- Your browser does not support the audio element.
-</audio>
+        drawMe();
+
+      </script>
+    </canvas>
+  </div> 
+  -->
+  <audio id="backgroundAudio" loop>
+    <source src="/assets/wasGood.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
 <script>
   // Get the audio element
@@ -205,6 +210,6 @@
             }
   });
 </script>
-    
+
 </body>
 </html>
