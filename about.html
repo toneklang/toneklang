@@ -123,6 +123,7 @@
             
             const imgLoad = ['/assets/toneklang_pure.png', '/assets/Soeren_Google_Portraits_DAG_2_2970.jpg'];
             const imgChoice = Math.floor(Math.random() * 2);
+            console.log(imgChoice); 
             
             const url = imgLoad[imgChoice];
             const fontFamily = "Google Sans";
@@ -174,7 +175,7 @@
                 let b = Math.random() * 255;
             
                 const glyph = getGlyph(r);
-                context.fillStyle = black;
+                context.fillStyle = 'black';
             
                 context.save();
                 context.translate(x, y);
