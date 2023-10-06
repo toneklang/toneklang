@@ -175,9 +175,9 @@
                     
                     context.save();
                     context.translate(x, y); 
-                    context.font = `${cell* 0.6}px ${fontFamily}`
-                    if (Math.random() < 0.08) context.font = `${cell* 5}px ${fontFamily}`
-                    if (r < 50) context.font = `${cell * 0.6}px ${fontFamily}`;
+                    context.font = `${cell* 2}px ${fontFamily}`
+                    if (Math.random() < 0.08) context.font = `${cell* 10}px ${fontFamily}`
+                    if (r < 50) context.font = `${cell * 2}px ${fontFamily}`;
                     context.fillText(glyph, 0, 0);
                     context.restore();
                 
