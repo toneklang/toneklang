@@ -123,7 +123,7 @@
 
             const url = '/assets/toneklang_pure.png';
             const fontFamily = "Google Sans";
-            const fontSize = 12;
+            const fontSize = 120;
             const width = canvas.width;
             const height = canvas.height;
          
@@ -143,7 +143,7 @@
                 const img = await loadMyImage(url);
                 console.log('image width', img.width);
                 
-                const cell = 100;
+                const cell = 1000;
                 const cols = Math.floor(width / cell);
                 const rows = Math.floor(height / cell); 
                 const numCell = cols * rows;
@@ -175,9 +175,9 @@
                     
                     context.save();
                     context.translate(x, y); 
-                    context.font = `${cell* 0.2}px ${fontFamily}`
-                    if (Math.random() < 0.08) context.font = `${cell* 1}px ${fontFamily}`
-                    if (r < 50) context.font = `${cell * 0.2}px ${fontFamily}`;
+                    context.font = `${cell* 0.6}px ${fontFamily}`
+                    if (Math.random() < 0.08) context.font = `${cell* 5}px ${fontFamily}`
+                    if (r < 50) context.font = `${cell * 0.6}px ${fontFamily}`;
                     context.fillText(glyph, 0, 0);
                     context.restore();
                 
