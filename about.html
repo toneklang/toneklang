@@ -123,7 +123,7 @@
 
             const url = '/assets/toneklang_pure.png';
             const fontFamily = "Google Sans";
-            const fontSize = 120;
+            const fontSize = 12;
             const width = canvas.width;
             const height = canvas.height;
          
@@ -175,9 +175,9 @@
                     
                     context.save();
                     context.translate(x, y); 
-                    context.font = `${cell* 2}px ${fontFamily}`
-                    if (Math.random() < 0.08) context.font = `${cell* 10}px ${fontFamily}`
-                    if (r < 50) context.font = `${cell * 2}px ${fontFamily}`;
+                    context.font = `${cell* .6}px ${fontFamily}`
+                    if (Math.random() < 0.08) context.font = `${cell* 2}px ${fontFamily}`
+                    if (r < 50) context.font = `${cell * .6}px ${fontFamily}`;
                     context.fillText(glyph, 0, 0);
                     context.restore();
                 
