@@ -118,92 +118,93 @@
   <div class="paint3">
     <canvas id="toneDist" width="2000px" height="2000px">
         <script>
-  const canvas = document.getElementById("toneDist");
-  const context = canvas.getContext("2d");
+            const canvas = document.getElementById("toneDist");
+            const context = canvas.getContext("2d");
 
-  const imgLoad = ['/assets/toneklang_pure.png', '/assets/Soeren_Google_Portraits_DAG_2_2970.jpg'];
-  const imgChoice = Math.floor(Math.random() * 2);
-  const url = imgLoad[imgChoice];
-  console.log(url);
+            const url = '/assets/toneklang_pure.png';
+            const fontFamily = "Google Sans";
+            const fontSize = 12;
+            const width = canvas.width;
+            const height = canvas.height;
+         
+            const loadMyImage = (url) => {
+              return new Promise((resolve, reject) => {
+                    const img = new Image(); 
+                    img.onload = () => resolve(img);
+                    img.onerror = () => reject(); 
+                    img.src = url; 
+                });
+            };
+      
 
-  const fontFamily = "Google Sans";
-  const fontSize = 12;
-  const width = canvas.width;
-  const height = canvas.height;
+            
 
-  const loadMyImage = (url) => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = () => reject();
-      img.src = url;
-    });
-  };
+            const start = async () => {
+                const img = await loadMyImage(url);
+                console.log('image width', img.width);
+                
+                const cell = 20;
+                const cols = Math.floor(width / cell);
+                const rows = Math.floor(height / cell); 
+                const numCell = cols * rows;
+                
+                context.drawImage(img, 0, 0, cols, rows);
+                const typeData = context.getImageData(0, 0, cols, rows).data;
 
-  let img; // Variable to hold the loaded image
+                context.fillStyle = 'white'
+                context.fillRect(0, 0, width, height);
 
-  // Load the image only once
-  loadMyImage(url)
-    .then((loadedImg) => {
-      img = loadedImg;
-      console.log("Image loaded successfully");
-      start(); // Start the animation after the image is loaded
-    })
-    .catch(() => {
-      console.error("Failed to load the image");
-    });
+            
+                for (let i = 0; i < numCell; i++) {
+                    let col = i % cols; 
+                    let row = Math.floor(i / cols); 
 
-  const animate = () => {
-    if (!img) return; // Wait for the image to be loaded
+                    let x = col * cell;
+                    let y = row * cell;
 
-    const cell = 20;
-    const cols = Math.floor(width / cell);
-    const rows = Math.floor(height / cell);
-    const numCell = cols * rows;
 
-    context.fillStyle = 'white';
-    context.fillRect(0, 0, width, height);
+                    let r = typeData[i * 4 + 0];
+                    let g = typeData[i * 4 + 1];
+                    let b = typeData[i * 4 + 2];
+                    let a = typeData[i * 4 + 3];
 
-    for (let i = 0; i < numCell; i++) {
-      let col = i % cols;
-      let row = Math.floor(i / cols);
+                    
+                    const glyph = getGlyph(r);
+                    context.fillStyle = 'black' //`rgb(${r}, ${g}, ${b})`; 
 
-      let x = col * cell;
-      let y = row * cell;
+                    
+                    context.save();
+                    context.translate(x, y); 
+                    context.font = `${cell* 2}px ${fontFamily}`
+                    if (Math.random() < 0.08) context.font = `${cell* 10}px ${fontFamily}`
+                    if (r < 50) context.font = `${cell * 1.2}px ${fontFamily}`;
+                    context.fillText(glyph, 0, 0);
+                    context.restore();
+                
+                }; 
+            }
 
-      let r = Math.random() * 255; // Randomize the color for each cell
-      let g = Math.random() * 255;
-      let b = Math.random() * 255;
+        const getGlyph = (v) => {
+                if (v < 50) return " ";
+                if (v < 100) return "-";
+                if (v < 150) return "_";
+                if (v < 200) return "/";
 
-      const glyph = getGlyph(r);
-      context.fillStyle = 'black';
+                const glyphs = ["_", "=", "+", "/"]; //"_=+/".split('');
+                const index = Math.floor(Math.random() * glyphs.length);
 
-      context.save();
-      context.translate(x, y);
-      context.font = `${cell * 2}px ${fontFamily}`;
-      if (Math.random() < 0.08) context.font = `${cell * 10}px ${fontFamily}`;
-      if (r < 50) context.font = `${cell * 1.2}px ${fontFamily}`;
-      context.fillText(glyph, 0, 0);
-      context.restore();
-    }
+                return glyphs[index];
+            }
 
-    requestAnimationFrame(animate); // Request the next animation frame
-  };
 
-  const getGlyph = (v) => {
-    if (v < 85) return " ";
-    if (v < 170) return "-";
-    if (v < 255) return "_";
 
-    const glyphs = ["_", "=", "+", "/"];
-    const index = Math.floor(Math.random() * glyphs.length);
+            start();
 
-    return glyphs[index];
-  };
 
-  // No need to start the animation here; it starts after the image is loaded
-</script>
-
+        
+            
+ 
+        </script>
 
     </canvas>
   </div>
