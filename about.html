@@ -121,7 +121,11 @@
             const canvas = document.getElementById("toneDist");
             const context = canvas.getContext("2d");
 
-            const url = '/assets/toneklang_pure.png';
+            const imgLoad = ['/assets/toneklang_pure.png', '/assets/Soeren_Google_Portraits_DAG_2_2970.jpg']
+            const imgSel = Math.floor(Math.random() * 2); 
+            const url = imgLoad[imgSel];
+            console.log(url);
+            
             const fontFamily = "Google Sans";
             const fontSize = 12;
             const width = canvas.width;
