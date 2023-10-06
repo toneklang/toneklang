@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toneklang</title>
+    <style>
+        p {
+          margin: 0px;
+        }
+        h1 {
+          margin: 0px;
+        }
+        h2 {
+          margin: 0px;
+        }
+        h3 {
+          margin: 0px;
+        }
+      </style>
+      <style>
+        html, body {
+          width: 100%;
+          height: 100%;
+          margin: 0px;
+          display:flexbox;
+        }
+        body {
+          background-color: black;
+          width: 100%;
+          height: 100%;
+        }
+        ul {
+          list-style-type: none;
+          margin: 0;
+          margin-right:1%;
+          background-color: transparent;
+        }
+        li {
+          background-color: transparent;
+          margin-bottom: -2.5vw;
+        }
+        li :hover{
+          color:#07F27B;
+        }
+        a {
+          font-size: 8vw;
+          font-family: Arial, Helvetica, sans-serif;
+          color: white;
+          letter-spacing:-1.5vw; 
+          text-decoration: none;
+        }
+      </style>
+      <style>
+        .topBar{
+          position:fixed;
+          margin: 0;
+          width: 100%;
+          height: 2%;
+          background-color: transparent;
+          text-align: right;
+          font-size: 8vw;
+          font-family: Arial, Helvetica, sans-serif;
+          color: white;
+          letter-spacing:-1.5vw; 
+        }
+        .headline{
+          margin-left: 2%;
+          height: 10%;
+          width: 50%;
+          text-align: left;
+          font-size: 8vw;
+          font-family: Arial, Helvetica, sans-serif;
+          color: white;
+          letter-spacing:-3vw; 
+          background-color: transparent;
+          position: absolute;
+        }
+        .headline h1:hover {
+          color: #07F27B;
+          cursor:pointer; 
+        }
+        .paint3{
+          display:flex;
+          margin:auto;
+          top: 40%;
+          background-color: transparent;
+          overflow: visible;
+          width: 100%;
+          height: 100%; 
+          justify-content: center;;
+          align-items: center;
+          
+        }
+        canvas {
+          max-width: none;
+          max-height: none;
+          overflow: hidden;      
+        }
+        
+    
+      </style>
+</head>
+<body>
+  <div class="topBar">
+    <ul>
+      <li><a href="www.toneklang.com">Home</a></li>
+      <li><a href="www.toneklang/music" target="_blank">music</a></li>
+      <li><a href="https://google.com" target="_blank">visual</a></li>
+      <li>about</li>
+    </ul>
+  </div>
+  <div class="headline" id="playAudioButton">
+    <h1>// Who dis?</h1>
+    <button id="playAudioBtn" style="relative: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;"></button>
+  </div>
+
+  <div class="paint3">
+    <canvas id="toneDist">
+        <script>
+            const canvas = document.getElementById("toneDist");
+            const context = canvas.getContext("2d");
+
+            const url = '/assets/toneklang_pure.png';
+            const fontFamily = "Google Sans";
+            const fontSize = 1200;
+            const width = canvas.width;
+            const height = canvas.height;
+         
+            const loadMyImage = (url) => {
+              return new Promise((resolve, reject) => {
+                    const img = new Image(); 
+                    img.onload = () => resolve(img);
+                    img.onerror = () => reject(); 
+                    img.src = url; 
+                });
+            };
+      
+
+            
+
+            const start = async () => {
+                const img = await loadMyImage(url);
+                console.log('image width', img.width);
+                
+                const cell = 100;
+                const cols = Math.floor(width / cell);
+                const rows = Math.floor(height / cell); 
+                const numCell = cols * rows;
+                
+                context.drawImage(img, 0, 0, cols, rows);
+                const typeData = context.getImageData(0, 0, cols, rows).data;
+
+                context.fillStyle = 'white'
+                context.fillRect(0, 0, width, height);
+
+            
+                for (let i = 0; i < numCell; i++) {
+                    let col = i % cols; 
+                    let row = Math.floor(i / cols); 
+
+                    let x = col * cell;
+                    let y = row * cell;
+
+
+                    let r = typeData[i * 4 + 0];
+                    let g = typeData[i * 4 + 1];
+                    let b = typeData[i * 4 + 2];
+                    let a = typeData[i * 4 + 3];
+
+                    
+                    const glyph = getGlyph(r);
+                    context.fillStyle = 'black' //`rgb(${r}, ${g}, ${b})`; 
+
+                    
+                    context.save();
+                    context.translate(x, y); 
+                    context.font = `${cell* 2}px ${fontFamily}`
+                    if (Math.random() < 0.08) context.font = `${cell* 10}px ${fontFamily}`
+                    if (r < 50) context.font = `${cell * 2}px ${fontFamily}`;
+                    context.fillText(glyph, 0, 0);
+                    context.restore();
+                
+                }; 
+            }
+
+        const getGlyph = (v) => {
+                if (v < 50) return " ";
+                if (v < 100) return "-";
+                if (v < 150) return "_";
+                if (v < 200) return "/";
+
+                const glyphs = "_=+/".split('');
+
+                return random.pick(glyphs);
+            }
+
+
+
+            start();
+
+
+        
+            
+ 
+        </script>
+
+    </canvas>
+  </div>
+ 
+  
+  <!-- <audio id="backgroundAudio" loop>
+    <source src="/assets/wasGood.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+<script>
+  // Get the audio element
+  const audio = document.getElementById('backgroundAudio');
+
+  // Get the headline div as the play button
+  const playButton = document.getElementById('playAudioButton');
+
+
+  // Set the desired volume (between 0 and 1)
+  audio.volume = 0.7; // Adjust the value as needed
+
+  // Add a click event listener to the play button (headline)
+  playButton.addEventListener('click', function () {
+    if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+  }); 
+</script>
+-->
+</body>
+</html>
