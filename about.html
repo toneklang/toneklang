@@ -180,7 +180,8 @@
                     if (r < 50) context.font = `${cell * 1.2}px ${fontFamily}`;
                     context.fillText(glyph, 0, 0);
                     context.restore();
-                
+
+                    requestAnimationFrame(start); // Request the next animation frame
                 }; 
             }
 
