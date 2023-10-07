@@ -54,7 +54,7 @@ function drawMe(timestamp) {
                 context.fillRect(dx, dy, rows, colls);
                 context.clearRect(dx + 2, dy + 2, rows * 0.75, colls * 0.75); 
                 context.translate(0.02 * i, 0.02 * j);
-                context.fillStyle = "#0D0D0D"; 
+                context.fillStyle = "white"; 
                 context.fillRect(dx + j * 2, dy - Math.floor(Math.random() * 4) * j, rows * Math.random()*0.7, colls * Math.random()); 
                 context.strokeRect = "green";
                 context.restore();
