@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-K5GG2K');</script>
-    <!-- End Google Tag Manager -->
-    
+
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-K5GG2K');</script>
+        <!-- End Google Tag Manager -->
+
     <title>Toneklang</title>
     <style>
         p {
@@ -50,7 +50,7 @@
           margin-bottom: -2.5vw;
         }
         li :hover{
-          color:#07F27B;
+          color:#ea4ee2;
         }
         a {
           font-size: 8vw;
@@ -74,7 +74,7 @@
           letter-spacing:-1.5vw; 
         }
         .headline{
-         margin-left: 2%;
+          margin-left: 2%;
           padding-top: 4%;
           height: 10%;
           width: 50%;
@@ -88,19 +88,20 @@
           position: absolute;
         }
         .headline h1:hover {
-          color: #07F27B;
+          color: #ea4ee2;
           cursor:pointer; 
         }
         .cube{
-          display: blcok; 
-          margin:auto;
+          display: block; 
+          margin:none;
           top: 40%;
           background-color: transparent;
-          overflow: visible;
+          overflow: hidden;
           width: 100%;
           height: 100%; 
           justify-content: center;
-          align-items: center;
+          align-items: top;
+          
         }
         canvas {
           max-width: none;
@@ -113,56 +114,58 @@
 </head>
 <body>
 
-<!-- Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K5GG2K"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  
   <div class="topBar">
     <ul>
-      <li><a href="https://www.toneklang.com">Home</a></li>
-      <li><a href="https://toneklang.com/music">music</a></li>
-      <li><a href="https://toneklang.com/visuals">visual</a></li>
-      <li><a href="https://toneklang.com/about">about</a></li>
+      <li><a href="www.toneklang.com">home</a></li>
+      <li><a href="www.toneklang/music" target="_blank">music</a></li>
+      <li><a href="https://www.toneklang.com/visuals">visual</a></li>
+      <li><a href="https://www.toneklang.com/about">about</a></li>
     </ul>
   </div>
   <div class="headline" id="playAudioButton">
     <h1>Coming soon...</h1>
     <button id="playAudioBtn" style="relative: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;"></button>
   </div>
-
-    <div class="cube">
-        <canvas id="musicCanvas" width="2000px" height="2000px">
-            <script src="/music.js"></script> 
+  
+  <div class="cube">
+    <canvas id="musicCanvas" width="2000px" height="2000px">
+    <script src="/Users/sorennielsen/Playground/JavaScript/Toneklang/music.js"></script> 
         </canvas> 
       </div>
- 
-  -->
-  <audio id="backgroundAudio" loop>
-    <source src="/assets/wasGood.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
 
-<script>
-  // Get the audio element
-  const audio = document.getElementById('backgroundAudio');
+    
+      
+      <audio id="backgroundAudio" loop>
+        <source src="/assets/wasGood.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
 
-  // Get the headline div as the play button
-  const playButton = document.getElementById('playAudioButton');
+    <script>
+      // Get the audio element
+      const audio = document.getElementById('backgroundAudio');
+
+      // Get the headline div as the play button
+      const playButton = document.getElementById('playAudioButton');
 
 
-  // Set the desired volume (between 0 and 1)
-  audio.volume = 0.7; // Adjust the value as needed
+      // Set the desired volume (between 0 and 1)
+      audio.volume = 0.7; // Adjust the value as needed
 
-  // Add a click event listener to the play button (headline)
-  playButton.addEventListener('click', function () {
-    if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
-  });
-</script>
-
-</body>
+      // Add a click event listener to the play button (headline)
+      playButton.addEventListener('click', function () {
+        if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+      });
+    </script>
+     
+  </body>
 </html>
