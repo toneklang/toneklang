@@ -71,6 +71,23 @@
           color: #07F27B;
           cursor:pointer; 
         }
+        .headlineMusic {
+          margin-left: 2%;
+          padding-top: 4%;
+          height: 10%;
+          width: 50%;
+          text-align: left;
+          font-size: 8vw;
+          font-family: Arial, Helvetica, sans-serif;
+          color: white;
+          letter-spacing:-3vw; 
+          line-height: 8vw;
+          background-color: transparent;
+          position: absolute;
+        }
+        .headlineMusic h1:hover {
+          color: #ea4ee2;
+          cursor:pointer; 
         .paint{
           display:flex;
           margin:auto;
