@@ -88,7 +88,7 @@
           max-height: none;
           overflow: hidden;      
         }
-          .paint3{
+        .paint3{
           display:flex;
           margin:auto;
           top: 40%;
@@ -98,4 +98,10 @@
           height: 100%; 
           justify-content: center;;
           align-items: center;
+
+        .imageMe{
+          min-width: 1000px;
+          align-content: center;
+          display: block;
+        }
    
